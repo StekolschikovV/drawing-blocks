@@ -7,29 +7,93 @@ var position = {
     startY: 0,
     stopX: 0,
     stopY: 0,
+    minX: 50,
+    minY: 50,
+    ClickTempBlockStatus: false,
 
 
     Start: function () {
         window.onmousemove = function (e) {
             position.tempX = e.pageX;
             position.tempY = e.pageY;
-            position.ChangePosition();
+            position.ChangePositionCursor();
+            position.ChangePositionStopCursor();
+            position.ClickTempBlockMove();
         }
     },
     SetStart: function (X, Y) {
         this.startX = this.tempX;
         this.startY = this.tempY;
+        position.ClickStartPositionStart();
+        position.ShowStopCursor();
+        position.ClickTempBlockStart();
+        position.ClickTempBlockStatus = true;
     },
     SetStop: function (X, Y) {
         position.stopX = position.tempX;
         position.stopY = position.tempY;
+        position.PaintingBlock();
+        position.ClickStartPositionStop();
+        position.ChangePositionStopStopCursor();
+        position.ClickTempBlockStop();
+        position.DelDotEl();
+        position.ClickTempBlockStatus = false;
+    },
+    PaintingBlock: function () {
         var w = Math.abs(position.tempX - position.startX);
         var h = Math.abs(position.tempY - position.startY);
-        $("#board").append("<div style='height: " + h + "px; width: " + w + "px; top:" +  (position.startY < position.stopY ? position.startY : position.stopY)  + "px; left:" + (position.startX < position.stopX ? position.startX : position.stopX) + "px'></div>");
+        $("#board").append("<div style='height: " + h + "px; width: " + w + "px; top:" + (position.startY < position.stopY ? position.startY : position.stopY) + "px; left:" + (position.startX < position.stopX ? position.startX : position.stopX) + "px'></div>");
     },
-    ChangePosition: function () {
-        $("#cursor").css({top: position.tempY, left: position.tempX});
+    ChangePositionCursor: function () {
+        $("#cursor").css({ top: position.tempY, left: position.tempX });
+    },
+    ShowStopCursor: function () {
+        $("#click-position-stop").css({ display: "block" });
+    },
+    ChangePositionStopCursor: function () {
+        $("#click-position-stop").css({ top: position.tempY - 10, left: position.tempX - 10 });
+    },
+    ClickStartPositionStart: function () {
+        $("#click-position-start").css({ top: position.tempY - 10, left: position.tempX - 10, display: "block" });
+    },
+    ClickStartPositionStop: function () {
+        $("#click-position-start").css({ display: "none" });
+    },
+    ChangePositionStopStopCursor: function () {
+        $("#click-position-stop").css({ display: "none" });
+    },
+    // ClickTempBlock
+    ClickTempBlockStart: function () {
+        $("#click-temp-block").css({ top: position.tempY, left: position.tempX, display: "block", height: 0, width: 0 });
+        position.ClickTempBlockStatus = true;
+    },
+    ClickTempBlockStop: function () {
+        $("#click-temp-block").css({ top: position.tempY, left: position.tempX, display: "none" });
+    },
+    ClickTempBlockMove: function () {
+        if (position.ClickTempBlockStatus == true) {
+            var w = Math.abs(position.tempX - position.startX);
+            var wTrue = position.tempX - position.startX;
+            var h = Math.abs(position.tempY - position.startY);
+            var hTrue = position.tempY - position.startY;
+            var x = (w == wTrue ? position.startX : position.tempX);
+            var y = (h == hTrue ? position.startY : position.tempY);
+            $("#click-temp-block").css({ height: h, width: w, top: y, left: x });
+            if (position.tempX - position.startX < position.minX && position.startX - position.tempX < position.minX || position.tempY - position.startY < position.minY && position.startY - position.tempY < position.minY) {
+                $("#click-temp-block").css({ "background-color": "red" });
+            } else {
+                $("#click-temp-block").css({ "background-color": "#f5d79b" });
+            }
+        }
+    },
+    // ClickTempBlock
+    // DelDotEl
+    DelDotEl: function () {
+        if (position.stopX - position.startX < position.minX && position.startX - position.stopX < position.minX || position.stopY - position.startY < position.minY && position.startY - position.stopY < position.minY) {
+            $("#board div:last").remove();
+        }
     }
+    // DelDotEl
 }
 
 $(document).ready(function () {
