@@ -23,7 +23,7 @@ var position = {
             e.toElement.id == "board" ? position.FreeSpace = true : position.FreeSpace = false;
             position.tempX = e.pageX;
             position.tempY = e.pageY;
-            position.ChangePositionCursor();
+            // position.ChangePositionCursor();
             position.ChangePositionStopCursor();
             position.ClickTempBlockMove();
         }
@@ -60,9 +60,9 @@ var position = {
         var h = Math.abs(position.tempY - position.startY);
         $("#board").append("<div onclick='position.SetZIndex(this)' style='height: " + h + "px; width: " + w + "px; top:" + (position.startY < position.stopY ? position.startY : position.stopY) + "px; left:" + (position.startX < position.stopX ? position.startX : position.stopX) + "px'></div>");
     },
-    ChangePositionCursor: function () {
-        $("#cursor").css({ top: position.tempY, left: position.tempX });
-    },
+    // ChangePositionCursor: function () {
+    //     $("#cursor").css({ top: position.tempY, left: position.tempX });
+    // },
     ShowStopCursor: function () {
         $("#click-position-stop").css({ display: "block" });
     },

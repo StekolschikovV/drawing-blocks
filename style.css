@@ -2,6 +2,7 @@ body {
     padding: 0;
     margin: 0;
     /*cursor: none;*/
+    overflow: hidden;
 }
 
 #board {
@@ -10,19 +11,36 @@ body {
     display: block;
     background: #f2f2ce;
     position: relative;
-    /*cursor: none;*/
+    /*cursor: none !important;*/
+    cursor: url('img/cursor.png'), auto !important;
+    /*cursor: url('img/cursor.png'), default !important;
+    cursor: url('img/cursor.png'), crosshair !important;
+    cursor: url('img/cursor.png'), help !important;
+    cursor: url('img/cursor.png'), move !important;
+    cursor: url('img/cursor.png'), pointer !important;
+    cursor: url('img/cursor.png'), progress !important;
+    cursor: url('img/cursor.png'), text !important;
+    cursor: url('img/cursor.png'), wait !important;
+    cursor: url('img/cursor.png'), n-resize !important;
+    cursor: url('img/cursor.png'), ne-resize !important;
+    cursor: url('img/cursor.png'), e-resize !important;
+    cursor: url('img/cursor.png'), se-resize !important;
+    cursor: url('img/cursor.png'), s-resize !important;
+    cursor: url('img/cursor.png'), sw-resize !important;
+    cursor: url('img/cursor.png'), w-resize !important;
+    cursor: url('img/cursor.png'), nw-resize !important;*/
 }
 
 #board div {
     position: absolute;
-    background: #e5e5e5 ;
+    background: #e5e5e5;
     outline: 1px solid #b2b2a8;
 }
 
 #cursor {
     width: 40px;
     height: 40px;
-    /*background: url('img/cursor.png');*/
+    background: url('img/cursor.png');
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -64,48 +82,51 @@ body {
     top: 0;
     left: 0;
     pointer-events: none;
-    background: #f5d79b ;
+    background: #f5d79b;
     display: none;
 }
-.ui-resizable-e, .ui-resizable-w, .ui-resizable-s, .ui-resizable-n{
-    outline: 0  !important;
+
+.ui-resizable-e, .ui-resizable-w, .ui-resizable-s, .ui-resizable-n {
+    outline: 0 !important;
 }
-.ui-resizable-e:hover, .ui-resizable-w:hover, .ui-resizable-s:hover, .ui-resizable-n:hover{
+
+.ui-resizable-e:hover, .ui-resizable-w:hover, .ui-resizable-s:hover, .ui-resizable-n:hover {
     background: #fd80fe !important;
     z-index: 9999 !important;
     transition-duration: 1s
 }
-.ui-resizable-e:active, .ui-resizable-w:active, .ui-resizable-s:active, .ui-resizable-n:active{
-    background:#bc01b4 !important;
+
+.ui-resizable-e:active, .ui-resizable-w:active, .ui-resizable-s:active, .ui-resizable-n:active {
+    background: #bc01b4 !important;
     z-index: 9999 !important;
     transition-duration: 1s
 }
+
 .ui-resizable-e, .ui-resizable-w {
-    width: 10px  !important;
+    width: 10px !important;
 }
-.ui-resizable-s, .ui-resizable-n{
-    height: 10px  !important;
+
+.ui-resizable-s, .ui-resizable-n {
+    height: 10px !important;
 }
-.ui-resizable-w{
+
+.ui-resizable-w {
     left: 0;
 }
-.ui-resizable-e{
+
+.ui-resizable-e {
     right: 0;
 }
 
-.ui-resizable-s{
+.ui-resizable-s {
     bottom: 0;
 }
-.ui-resizable-n{
+
+.ui-resizable-n {
     top: 0;
 }
 
-
-
-
-
-
-#info{
+#info {
     position: absolute;
     z-index: 999;
     top: 50px;
