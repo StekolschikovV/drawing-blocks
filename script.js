@@ -148,7 +148,8 @@ var position = {
         });
         $("#board div:last").css({ "z-index": "999" });
     },
-    // Area
+    // Area 
+    
     GetArea: function (area) {
         position.area += area;
     },
