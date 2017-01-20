@@ -5,6 +5,10 @@ body {
     overflow: hidden;
 }
 
+#board * {
+    cursor: url('img/cursor.png'), auto !important;
+}
+
 #board {
     width: 100%;
     height: 100vh;
@@ -141,7 +145,6 @@ body {
     z-index: 9999;
     background: white;
     display: none
-
 }
 
 .click-menu-el {
@@ -152,6 +155,7 @@ body {
     cursor: pointer;
     transition-duration: .5s;
 }
+
 .click-menu-el:hover {
     background: #fdddb7;
 }
