@@ -133,7 +133,9 @@ var position = {
         $("#board div").last().resizable({
             handles: 'n, e, s, w'
         });
-        $("#board div").draggable();
+        $("#board div").draggable({
+            snap:true
+        });
     },
     // resizableAndDraggable
     SetZIndex: function (e) {
@@ -149,7 +151,7 @@ var position = {
         $("#board div:last").css({ "z-index": "999" });
     },
     // Area 
-    
+
     GetArea: function (area) {
         position.area += area;
     },
