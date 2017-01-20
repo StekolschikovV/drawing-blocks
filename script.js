@@ -1,6 +1,7 @@
 var position = {
 
 
+    e: 0,
     tempX: 0,
     tempY: 0,
     startX: 0,
@@ -10,10 +11,15 @@ var position = {
     minX: 50,
     minY: 50,
     ClickTempBlockStatus: false,
+    FreeSpace: true,
+    FreeSpaceConform: true,
+
 
 
     Start: function () {
         window.onmousemove = function (e) {
+            position.e = position;
+            e.toElement.id == "board" ? position.FreeSpace = true : position.FreeSpace = false;
             position.tempX = e.pageX;
             position.tempY = e.pageY;
             position.ChangePositionCursor();
@@ -22,27 +28,34 @@ var position = {
         }
     },
     SetStart: function (X, Y) {
-        this.startX = this.tempX;
-        this.startY = this.tempY;
-        position.ClickStartPositionStart();
-        position.ShowStopCursor();
-        position.ClickTempBlockStart();
-        position.ClickTempBlockStatus = true;
+        position.FreeSpaceConform = position.FreeSpace;
+        if (position.FreeSpaceConform) {
+            this.startX = this.tempX;
+            this.startY = this.tempY;
+            position.ClickStartPositionStart();
+            position.ShowStopCursor();
+            position.ClickTempBlockStart();
+            position.ClickTempBlockStatus = true;
+        }
     },
     SetStop: function (X, Y) {
-        position.stopX = position.tempX;
-        position.stopY = position.tempY;
-        position.PaintingBlock();
-        position.ClickStartPositionStop();
-        position.ChangePositionStopStopCursor();
-        position.ClickTempBlockStop();
-        position.DelDotEl();
-        position.ClickTempBlockStatus = false;
+        if (position.FreeSpaceConform) {
+            position.stopX = position.tempX;
+            position.stopY = position.tempY;
+            position.PaintingBlock();
+            position.ClickStartPositionStop();
+            position.ChangePositionStopStopCursor();
+            position.ClickTempBlockStop();
+            position.DelDotEl();
+            position.ClickTempBlockStatus = false;
+            position.resizableAndDraggable();
+            position.SetZIndexToAddEl();
+        }
     },
     PaintingBlock: function () {
         var w = Math.abs(position.tempX - position.startX);
         var h = Math.abs(position.tempY - position.startY);
-        $("#board").append("<div style='height: " + h + "px; width: " + w + "px; top:" + (position.startY < position.stopY ? position.startY : position.stopY) + "px; left:" + (position.startX < position.stopX ? position.startX : position.stopX) + "px'></div>");
+        $("#board").append("<div onclick='position.SetZIndex(this)' style='height: " + h + "px; width: " + w + "px; top:" + (position.startY < position.stopY ? position.startY : position.stopY) + "px; left:" + (position.startX < position.stopX ? position.startX : position.stopX) + "px'></div>");
     },
     ChangePositionCursor: function () {
         $("#cursor").css({ top: position.tempY, left: position.tempX });
@@ -92,12 +105,30 @@ var position = {
         if (position.stopX - position.startX < position.minX && position.startX - position.stopX < position.minX || position.stopY - position.startY < position.minY && position.startY - position.stopY < position.minY) {
             $("#board div:last").remove();
         }
-    }
+    },
     // DelDotEl
-}
+    // resizableAndDraggable
+    resizableAndDraggable: function () {
+        $("#board div").last().resizable({
+            handles: 'n, e, s, w'
+        });
+        $("#board div").draggable();
+    },
+    // resizableAndDraggable
+    SetZIndex: function (e) {
+        $("#board div").each(function (i, elem) {
+            $(elem).css({ "z-index": "998" });
+        });
+        $(e).css({ "z-index": "999" });
+    },
+    SetZIndexToAddEl: function (e) {
+        $("#board div").each(function (i, elem) {
+            $(elem).css({ "z-index": "998" });
+        });
+        $("#board div:last").css({ "z-index": "999" });
+    }
 
+}
 $(document).ready(function () {
     position.Start();
 });
-
-

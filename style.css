@@ -1,7 +1,7 @@
 body {
     padding: 0;
     margin: 0;
-    cursor: none;
+    /*cursor: none;*/
 }
 
 #board {
@@ -10,7 +10,7 @@ body {
     display: block;
     background: #f2f2ce;
     position: relative;
-    cursor: none;
+    /*cursor: none;*/
 }
 
 #board div {
@@ -22,7 +22,7 @@ body {
 #cursor {
     width: 40px;
     height: 40px;
-    background: url('img/cursor.png');
+    /*background: url('img/cursor.png');*/
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -67,3 +67,41 @@ body {
     background: #f5d79b ;
     display: none;
 }
+.ui-resizable-e, .ui-resizable-w, .ui-resizable-s, .ui-resizable-n{
+    outline: 0  !important;
+}
+.ui-resizable-e:hover, .ui-resizable-w:hover, .ui-resizable-s:hover, .ui-resizable-n:hover{
+    background: #fd80fe !important;
+    z-index: 9999 !important;
+    transition-duration: 1s
+}
+.ui-resizable-e:active, .ui-resizable-w:active, .ui-resizable-s:active, .ui-resizable-n:active{
+    background:#bc01b4 !important;
+    z-index: 9999 !important;
+    transition-duration: 1s
+}
+.ui-resizable-e, .ui-resizable-w {
+    width: 10px  !important;
+}
+.ui-resizable-s, .ui-resizable-n{
+    height: 10px  !important;
+}
+.ui-resizable-w{
+    left: 0;
+}
+.ui-resizable-e{
+    right: 0;
+}
+
+.ui-resizable-s{
+    bottom: 0;
+}
+.ui-resizable-n{
+    top: 0;
+}
+
+
+
+
+
+
