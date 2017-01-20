@@ -105,3 +105,10 @@ body {
 
 
 
+#info{
+    position: absolute;
+    z-index: 999;
+    top: 50px;
+    right: 50px;
+    color: burlywood;
+}

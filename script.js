@@ -13,6 +13,7 @@ var position = {
     ClickTempBlockStatus: false,
     FreeSpace: true,
     FreeSpaceConform: true,
+    area: 0,
 
 
 
@@ -50,6 +51,8 @@ var position = {
             position.ClickTempBlockStatus = false;
             position.resizableAndDraggable();
             position.SetZIndexToAddEl();
+            position.GetArea(Math.abs(position.stopX - position.startX) * Math.abs(position.stopY - position.startY));
+            position.SetArea();
         }
     },
     PaintingBlock: function () {
@@ -126,6 +129,12 @@ var position = {
             $(elem).css({ "z-index": "998" });
         });
         $("#board div:last").css({ "z-index": "999" });
+    },
+    GetArea: function (area) {
+        position.area += area;
+    },
+    SetArea: function () {
+        document.getElementById("area").innerHTML = position.area;
     }
 
 }
