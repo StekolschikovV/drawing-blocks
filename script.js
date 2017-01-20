@@ -11,8 +11,9 @@ var position = {
     minX: 50,
     minY: 50,
     ClickTempBlockStatus: false,
-    FreeSpace: true,
-    FreeSpaceConform: true,
+    FreeSpace: false,
+    FreeSpaceConform: false,
+    ShowMenu: false,
     area: 0,
 
 
@@ -27,19 +28,35 @@ var position = {
             position.ChangePositionStopCursor();
             position.ClickTempBlockMove();
         }
+        $('*').bind('contextmenu', function (e) {
+            return false;
+        });
+        $('*').click(function () {
+            if (position.ShowMenu == true) {
+                $("#click-menu").css({ top: "-500", left: "-500", display: "none" });
+                position.ShowMenu = false;
+            }
+
+        });
     },
-    SetStart: function (X, Y) {
-        position.FreeSpaceConform = position.FreeSpace;
-        if (position.FreeSpaceConform) {
-            this.startX = this.tempX;
-            this.startY = this.tempY;
-            position.ClickStartPositionStart();
-            position.ShowStopCursor();
-            position.ClickTempBlockStart();
-            position.ClickTempBlockStatus = true;
+    SetStart: function (event) {
+        if (event.buttons == 1) {
+            position.FreeSpaceConform = position.FreeSpace;
+            if (position.FreeSpaceConform) {
+                position.startX = position.tempX;
+                position.startY = position.tempY;
+                position.ClickStartPositionStart();
+                position.ShowStopCursor();
+                position.ClickTempBlockStart();
+                position.ClickTempBlockStatus = true;
+            }
+        } else {
+            position.SetMenuPosition(event);
         }
+
     },
-    SetStop: function (X, Y) {
+    SetStop: function (event) {
+
         if (position.FreeSpaceConform) {
             position.stopX = position.tempX;
             position.stopY = position.tempY;
@@ -54,6 +71,7 @@ var position = {
             position.GetArea(Math.abs(position.stopX - position.startX) * Math.abs(position.stopY - position.startY));
             position.SetArea();
         }
+
     },
     PaintingBlock: function () {
         var w = Math.abs(position.tempX - position.startX);
@@ -130,13 +148,18 @@ var position = {
         });
         $("#board div:last").css({ "z-index": "999" });
     },
+    // Area
     GetArea: function (area) {
         position.area += area;
     },
     SetArea: function () {
         document.getElementById("area").innerHTML = position.area;
+    },
+    // Area
+    SetMenuPosition: function (event) {
+        $("#click-menu").css({ top: event.pageY, left: event.pageX, display: 'block' });
+        position.ShowMenu = true;
     }
-
 }
 $(document).ready(function () {
     position.Start();

@@ -133,3 +133,25 @@ body {
     right: 50px;
     color: burlywood;
 }
+
+#click-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: white;
+    display: none
+
+}
+
+.click-menu-el {
+    padding: 5px 10px;
+    display: block;
+    border: 1px solid #c87114;
+    margin-bottom: -1px;
+    cursor: pointer;
+    transition-duration: .5s;
+}
+.click-menu-el:hover {
+    background: #fdddb7;
+}

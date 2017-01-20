@@ -5,7 +5,6 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -14,13 +13,21 @@
     </head>
 
     <body>
-        <div id="board" onmousedown="position.SetStart(event.pageX, event.pageY)" onmouseup="position.SetStop(event.pageX, event.pageY)"></div>
+        <div id="board" onmousedown="position.SetStart(event)" onmouseup="position.SetStop(event)"></div>
         <!--<div id="cursor"></div>-->
         <div id="click-position-start"></div>
         <div id="click-position-stop"></div>
         <div id="click-temp-block"></div>
         <div id="info">
             <div>Площадь: <span id="area">0</span></div>
+        </div>
+        <div id="click-menu">
+            <div class="click-menu-el">Текст</div>
+            <div class="click-menu-el">Текст Текст</div>
+            <div class="click-menu-el">ТекстТекст</div>
+            <div class="click-menu-el">Текст Текст Текст Текст</div>
+            <div class="click-menu-el">ТекстТекстТекст</div>
+            <div class="click-menu-el">Текст<ТекстТекстТекстТекст</div>
         </div>
     </body>
 
